@@ -24,22 +24,24 @@
                                 <th>No</th>
                                 <th>Product</th>
                                 <th>Description</th>
-                                <th>Kode</th>
-                                <th>Harga</th>
-                                <th>Stok</th>
-                                <th>Kategori</th>
+                                <th>Code</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Category</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>No</td>
-                                <td>Product</td>
-                                <td>Description</td>
-                                <td>Kode</td>
-                                <td>Harga</td>
-                                <td>Stok</td>
-                                <td>Kategori</td>
-                            </tr>
+                             @foreach ($products as $product)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->sku }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->stock }}</td>
+                                    <td>{{ $product->category->name }}</td>
+                                </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
