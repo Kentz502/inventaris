@@ -50,14 +50,16 @@
                                     <td>
                                         <div class="d-flex">
                                             <a href="/categories/edit/{{ $category->id }}" class="btn btn-sm btn-warning mr-2">Edit</a>
-                                        <form action="/categories/{{ $category->id }}" method="POST">
+                                        {{-- <form action="/categories/{{ $category->id }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        </form>
+                                        </form> --}}
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $category->id }}">Delete</button>
                                         </div>
                                     </td>
                                 </tr>
+                                @include('pages.categories.delete-confirmation')
                                 @endforeach
                         </tbody>
                     </table>
