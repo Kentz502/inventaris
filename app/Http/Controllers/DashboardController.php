@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index() {
+        if(!Auth::check()) {
+            return redirect('/login')->with('error-unauthorized', 'You have not logged in.');
+        }
+
         $productCount = Product::count();
         $categoryCount = Category::count();
 
