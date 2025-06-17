@@ -16,8 +16,15 @@
 @section('content')
     <div class="row">
         <div class="col">
-            {{-- @if (@errors->any()) --}}
-            {{-- @endif --}}
+     @if ($errors->any())
+    <script>
+    Swal.fire({
+        title: "Error!",
+        text: "@foreach($errors->all() as $error) {{ $error }} @endforeach",
+        icon: "error"
+    });
+    </script>
+      @endif
             <form action="/categories/{{ $category->id }}" method="POST">
                 @csrf
                 @method('PUT')

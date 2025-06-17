@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function index() {
-        $products = Product::with('category')->paginate(10);
+        $products = Product::with('category')->latest()->paginate(10);
 
         return view('pages.products.index', [
             "products" => $products,
@@ -35,11 +35,18 @@ class ProductController extends Controller
             "stock" => "required",
             "category_id" => "required",
             "sku" => "required",
+        ], [
+            "name.required" => "The name field is required.",
+            "name.min" => "The name must be at least 3 characters.",
+            "price.required" => "The price field is required.",
+            "stock.required" => "The stock field is required.",
+            "category_id.required" => "The category field is required.",
+            "sku.required" => "The sku field is required.",
         ]);
 
         Product::create($validated);
 
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Product created successfully.');
     }
 
     public function edit($id) {
@@ -56,7 +63,7 @@ class ProductController extends Controller
         $product = Product::where('id', $id);
         $product->delete();
 
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Product deleted successfully.');
     }
 
     public function update(Request $request, $id) {
@@ -68,10 +75,17 @@ class ProductController extends Controller
             "stock" => "required",
             "category_id" => "required",
             "sku" => "required",
+        ], [
+            "name.required" => "The name field is required.",
+            "name.min" => "The name must be at least 3 characters.",
+            "price.required" => "The price field is required.",
+            "stock.required" => "The stock field is required.",
+            "category_id.required" => "The category field is required.",
+            "sku.required" => "The sku field is required.",
         ]);
 
         Product::where('id', $id)->update($validated);
 
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Product updated successfully.');
     }
 }
